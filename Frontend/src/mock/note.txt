@@ -1,0 +1,1 @@
+Nơi chứa các dữ liệu giả lập hoặc dữ liệu mẫu.

@@ -1,0 +1,260 @@
+p,
+span {
+  font-size: 16px;
+  color: #667580;
+}
+
+a {
+  font-size: 14px;
+  color: rgb(77, 161, 232);
+}
+
+layout {
+  background-color: #37383a;
+}
+#title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1da1f2;
+}
+
+#avatar {
+  border-radius: 100px;
+  border: 1px solid white;
+}
+.bold {
+  font-weight: 700 !important;
+  font-size: 20px;
+}
+#bigfont {
+  font-size: 36px;
+  color: #667580;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#icon {
+  border-radius: 100px;
+  border: 1px solid black;
+  width: 32px;
+  height: 30px;
+  display: "inline-block";
+}
+/* Lịch học */
+#lichhoc {
+  font-size: 16px;
+  color: rgb(77, 161, 232);
+  background-color: #e0fbff;
+}
+#lichhoc #bigfont {
+  color: rgb(77, 161, 232);
+}
+#lichhoc #icon {
+  border: 0.5px solid rgb(77, 161, 232);
+}
+/* Lịch thi */
+#lichthi {
+  font-size: 16px;
+  color: #ff9205;
+  background-color: #fff2d4;
+}
+#lichthi #bigfont {
+  color: #ff9205;
+}
+#lichthi #icon {
+  border: 0.5px solid #ff9205;
+}
+
+#hearRight {
+  width: 49%;
+  display: inline;
+}
+
+.featured {
+  width: 100%;
+  justify-items: center;
+  display: flex;
+}
+
+.featured-item {
+  text-align: center;
+  width: 90%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+  background-color: white;
+}
+
+.featured-item .icon {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.featured .featured-item .box-df {
+  min-height: 120px;
+}
+
+.chart-custom .box-df {
+  height: 366px;
+  overflow: hidden;
+}
+
+.portlet {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.portlet > .portlet-title {
+  border-bottom: 1px solid #eee;
+  padding: 0;
+  margin-bottom: 10px;
+  min-height: 41px;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  -ms-border-radius: 4px 4px 0 0;
+  -o-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+.portlet > .portlet-title > .caption {
+  float: left;
+  display: inline-block;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 10px 0;
+}
+
+.portlet > .portlet-title > .actions {
+  float: right;
+  display: inline-block;
+  padding: 6px 0;
+  border: 1 solid #eee;
+}
+.panel-admin .panel-heading {
+  background: #fff;
+  padding: 15px 0;
+}
+
+.panel-admin .panel-heading span {
+  width: 50%;
+  display: inline-block;
+  float: left;
+}
+
+.panel-admin .panel-scroll {
+  height: 220px;
+}
+
+.panel-admin .table td {
+  vertical-align: middle !important;
+  padding: 7px 0;
+}
+.portlet > .portlet-body p {
+  margin-top: 0;
+}
+
+.col-md-3 {
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+}
+
+.portlet > .portlet-title:after,
+.portlet > .portlet-title:before {
+  content: " ";
+  display: table;
+}
+
+.portlet > .portlet-title:after {
+  clear: both;
+}
+
+.portlet > .portlet-title > .caption {
+  float: left;
+  display: inline-block;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 10px 0;
+}
+
+.portlet > .portlet-title > .actions {
+  float: right;
+  display: inline-block;
+  padding: 6px 0;
+}
+
+.portlet > .portlet-body {
+  clear: both;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  -ms-border-radius: 0 0 4px 4px;
+  -o-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+}
+
+.portlet > .portlet-body p {
+  margin-top: 0;
+}
+
+.col-md-5 {
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+  width: 45%;
+  display: "flex";
+}
+.col-md-3 {
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+  width: 25%;
+  display: "flex";
+  margin-left: 25px;
+}
+.col-md-4 {
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+  width: 35%;
+  display: "flex";
+  margin-left: 25px;
+}
+.chart-custom {
+  display: "flex";
+  justify-content: "center";
+}
+#cboIDDotForLHP,
+#cboIDDotThongKeKQHT {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.panel-admin .table td {
+  vertical-align: middle !important;
+  padding: 7px 0;
+}
+.portlet > .portlet-body p {
+  margin-top: 0;
+}
+.panel-admin .panel-scroll {
+  height: 220px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+s table tbody tr {
+  border: 1px solid #ccc;
+  border-top: 1px solid black;
+}
+
+body{
+  /* kich thước bằng 80% */
+  zoom:88%;
+}

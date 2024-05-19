@@ -1,0 +1,1 @@
+Nơi chứa các layout hoặc cấu trúc giao diện chung 

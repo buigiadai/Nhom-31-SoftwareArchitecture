@@ -1,0 +1,1 @@
+Thư mục chứa các hàm tiện ích hoặc công cụ phụ trợ được sử dụng trong dự án.
