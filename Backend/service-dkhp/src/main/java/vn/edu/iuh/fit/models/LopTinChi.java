@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+
 @Entity
 @Table(name = "lop_tin_chis")
 @Builder
@@ -25,6 +26,7 @@ public class LopTinChi implements Serializable {
     private String phong;
     private String ghiChu;
 
+
     @ManyToOne
     @JoinColumn(name = "maGV")
     private GiaoVien giaoVien;
@@ -43,5 +45,14 @@ public class LopTinChi implements Serializable {
         this.ghiChu = ghiChu;
         this.giaoVien = giaoVien;
         this.lopHocPhan = lopHocPhan;
+    }
+
+    public String getLichHoc() {
+        return String.format("%s - %s (Tiết %s - %s)",
+                isLyThuyet ? "LT" : "TH",
+                "Thứ 6",
+                tietBatDau,
+                tietKetThuc
+        );
     }
 }

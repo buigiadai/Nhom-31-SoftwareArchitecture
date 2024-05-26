@@ -18,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 public class SinhVien implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mssv")
     private long id;
     private String hoTen;
@@ -31,8 +30,18 @@ public class SinhVien implements Serializable {
     @JoinColumn(name = "maLopHoc")
     private LopHoc lopHoc;
 
-    @OneToMany(mappedBy = "sinhVien", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sinhVien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SinhVien_LHP> sinhVien_lhps;
+
+    public SinhVien(long id, String hoTen, LocalDate ngaySinh, String urlImage, LoaiSinhVien loaiSinhVien, boolean isMale, LopHoc lopHoc) {
+        this.id = id;
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.urlImage = urlImage;
+        this.loaiSinhVien = loaiSinhVien;
+        this.isMale = isMale;
+        this.lopHoc = lopHoc;
+    }
 
     public SinhVien(String hoTen, LocalDate ngaySinh, String urlImage, LoaiSinhVien loaiSinhVien, boolean isMale, LopHoc lopHoc) {
         this.hoTen = hoTen;

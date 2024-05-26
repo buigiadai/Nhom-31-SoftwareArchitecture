@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import vn.edu.iuh.fit.dto.HocPhanResponse;
+import vn.edu.iuh.fit.dto.MonHocTQResponse;
 import vn.edu.iuh.fit.models.MonHoc_CTK;
 import vn.edu.iuh.fit.repositories.MonHocRepository;
 
@@ -20,12 +21,18 @@ public class MonHocService {
         return monHocCtks.stream().map(this::mapToHocPhanResponse).toList();
     }
 
-    private HocPhanResponse mapToHocPhanResponse(MonHoc_CTK monHocCtk){
+    private HocPhanResponse mapToHocPhanResponse(MonHoc_CTK monHocCtk) {
         return new HocPhanResponse(
                 monHocCtk.getMonHoc().getId(),
                 monHocCtk.getMonHoc().getTenMon(),
-                monHocCtk.getMonHoc().getSoChiLT()+ monHocCtk.getMonHoc().getSoChiTH(),
+                monHocCtk.getMonHoc().getSoChiLT() + monHocCtk.getMonHoc().getSoChiTH(),
                 monHocCtk.isBatBuoc(),
-                monHocCtk.getMonHoc().getMonHocTienQuyets().stream().map(x->x.getMonHocTienQuyet().getId()).toList());
+                monHocCtk.getMonHoc().getMonHocTienQuyets().stream().map(
+                        x -> new MonHocTQResponse(
+                                x.getMonHocTienQuyet().getId(),
+                                x.getMonHocTienQuyet().getTenMon(),
+                                x.getLoaiTienQuyet().getValueString())
+                ).toList()
+        );
     }
 }

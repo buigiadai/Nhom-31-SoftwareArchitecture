@@ -1,7 +1,7 @@
 package vn.edu.iuh.fit.enums;
 
 public enum TrangThaiLHP {
-    CHODANGKY(-1), DANGHOC(0),DAKETTHUC(1);
+    CHODANGKY(-1), DANGHOC(0), DAKETTHUC(1);
 
     private int value;
 
@@ -20,5 +20,13 @@ public enum TrangThaiLHP {
             }
         }
         throw new IllegalArgumentException("Không tìm thấy trạng thái học tập với giá trị " + value);
+    }
+
+    public String getValueString() {
+        if (value == -1)
+            return "Chờ đăng ký";
+        if (value == -1)
+            return "Đang học";
+        return "Đã khóa";
     }
 }

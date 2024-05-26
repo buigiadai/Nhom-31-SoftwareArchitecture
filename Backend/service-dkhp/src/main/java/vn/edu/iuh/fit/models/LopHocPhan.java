@@ -8,6 +8,7 @@ import vn.edu.iuh.fit.enums.TrangThaiLHP;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "lop_hoc_phans")
@@ -17,7 +18,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class LopHocPhan  implements Serializable {
+public class LopHocPhan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maLHP")
@@ -33,11 +34,18 @@ public class LopHocPhan  implements Serializable {
     @JoinColumn(name = "maMonHoc")
     private MonHoc monHoc;
 
-    @OneToMany(mappedBy = "lopHocPhan",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lopHocPhan", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LopTinChi> lopTinChis;
 
-    @OneToMany(mappedBy = "lopHocPhan",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lopHocPhan", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SinhVien_LHP> sinhVienLhps;
+
+    public int getSoLuongToiDa() {
+        Optional<LopTinChi> item = lopTinChis.stream()
+                .filter(LopTinChi::isLyThuyet)
+                .findFirst();
+        return item.isEmpty() ? 0 : item.get().getSoLuongToiDa();
+    }
 
     public LopHocPhan(String tenLHP, int namHoc, HocKy hocKy, TrangThaiLHP trangThaiLHP, double hocPhi, LocalDate hanNop, MonHoc monHoc) {
         this.tenLHP = tenLHP;

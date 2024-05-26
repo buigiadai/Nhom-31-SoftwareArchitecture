@@ -21,5 +21,13 @@ public enum LoaiTienQuyet {
         }
         throw new IllegalArgumentException("Không tìm thấy trạng thái học tập với giá trị " + value);
     }
+
+    public String getValueString() {
+        if (value == 0)
+            return "a";
+        if (value == 1)
+            return "b";
+        return "c";
+    }
 }
 

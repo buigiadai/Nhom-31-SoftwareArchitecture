@@ -45,7 +45,7 @@ class ServiceInstanceRestController {
     private ChuongTrinhKhungRepository chuongTrinhKhungRepository;
 
 
-    @Bean
+//    @Bean
     CommandLineRunner initData(LopHocRepository lopHocRepository, SinhVienRepository sinhVienRepository, MonHocRepository monHocRepository, MonHoc_CTKRepository monHoc_CTKRepository, MonHocTienQuyetRepository monHocTienQuyetRepository, LopHocPhanRepository lopHocPhanRepository, LopTinChiRepository lopTinChiRepository, SinhVien_LHPRepository sinhVien_LHPRepository) {
         return args -> {
             Random rnd = new Random();
@@ -101,7 +101,7 @@ class ServiceInstanceRestController {
             //add Sinh vien
             SinhVien sinhVien = new SinhVien();
             for (int i = 1; i <= 30; i++) {
-                sinhVien = new SinhVien("SV CNTT#" + i, LocalDate.of(2003, 1, (int) i % 31), "https://plus.unsplash.com/premium_photo-1661758351472-52ed02e99496?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SVR8ZW58MHx8MHx8fDA%3D", LoaiSinhVien.DANGHOC, rnd.nextBoolean(), lopHoc);
+                sinhVien = new SinhVien(20115700L + i, "SV CNTT#" + i, LocalDate.of(2003, 1, (int) i % 31), "https://plus.unsplash.com/premium_photo-1661758351472-52ed02e99496?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SVR8ZW58MHx8MHx8fDA%3D", LoaiSinhVien.DANGHOC, rnd.nextBoolean(), lopHoc);
                 sinhVienRepository.save(sinhVien);
             }
 
@@ -146,7 +146,7 @@ class ServiceInstanceRestController {
             SinhVien_LHP sinhVienLhp = new SinhVien_LHP();
             for (int j = 1; j <= 3; j++) {
                 for (int i = 1; i <= 30; i++) {
-                    sinhVienLhp = new SinhVien_LHP(SinhVien.builder().id(i).build(), LopHocPhan.builder().id(j).build(), TrangThaiSvLHP.DANGHOC, true, 0, true, LocalDate.of(2023, 10, 10), LocalDate.of(2023, 9, 1));
+                    sinhVienLhp = new SinhVien_LHP(SinhVien.builder().id(20115700L + i).build(), LopHocPhan.builder().id(j).build(), TrangThaiSvLHP.DANGHOC, true, 0, true, LocalDate.of(2023, 10, 10), LocalDate.of(2023, 9, 1));
                     sinhVien_LHPRepository.save(sinhVienLhp);
                 }
             }

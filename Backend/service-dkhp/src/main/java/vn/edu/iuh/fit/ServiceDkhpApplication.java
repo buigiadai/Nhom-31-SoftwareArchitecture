@@ -101,7 +101,7 @@ class ServiceInstanceRestController {
             //add Sinh vien
             SinhVien sinhVien = new SinhVien();
             for (int i = 1; i <= 30; i++) {
-                sinhVien = new SinhVien("SV CNTT#" + i, LocalDate.of(2003, 1, (int) i % 31), "https://plus.unsplash.com/premium_photo-1661758351472-52ed02e99496?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SVR8ZW58MHx8MHx8fDA%3D", LoaiSinhVien.DANGHOC, rnd.nextBoolean(), lopHoc);
+                sinhVien = new SinhVien(20115700L + i, "SV CNTT#" + i, LocalDate.of(2003, 1, (int) i % 31), "https://plus.unsplash.com/premium_photo-1661758351472-52ed02e99496?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SVR8ZW58MHx8MHx8fDA%3D", LoaiSinhVien.DANGHOC, rnd.nextBoolean(), lopHoc);
                 sinhVienRepository.save(sinhVien);
             }
 
@@ -110,17 +110,17 @@ class ServiceInstanceRestController {
             MonHoc monHoc = new MonHoc();
             MonHoc_CTK monHocCtk = new MonHoc_CTK();
 
-            for (int i = 1; i <= 30; i++) {
+            for (int i = 1; i <= 40; i++) {
                 monHoc = new MonHoc("Mon CNTT#" + i, rnd.nextInt(2, 4), rnd.nextInt(0, 2), khoaCNTT);
                 monHocRepository.save(monHoc);
 
-                monHocCtk = new MonHoc_CTK(chuongTrinhKhungCNTT, monHoc, rnd.nextInt(1, 9), rnd.nextBoolean());
+                monHocCtk = new MonHoc_CTK(chuongTrinhKhungCNTT, monHoc, (i - 1) / 5 + 1, i % 5 != 0);
                 monHoc_CTKRepository.save(monHocCtk);
 
             }
 
-            //add Mon Hoc - Chuong Trinh Khung
-            for (int i = 26; i <= 30; i++) {
+            //add Mon Hoc Tien Quyet
+            for (int i = 36; i <= 40; i++) {
                 MonHocTienQuyet monHocTienQuyet = new MonHocTienQuyet(MonHoc.builder().id((long) i).build(), MonHoc.builder().id((long) i - 10 + rnd.nextLong(1, 4)).build(), LoaiTienQuyet.HOCTRUOC);
                 monHocTienQuyetRepository.save(monHocTienQuyet);
             }
@@ -137,8 +137,8 @@ class ServiceInstanceRestController {
             //add Lop Tin Chi
             LopTinChi lopTinChi = new LopTinChi();
             int[] tiet = {1, 4, 7, 10};
-            for (int i = 1; i <= 3; i++) {
-                lopTinChi = new LopTinChi(30, 0, true, tiet[i], tiet[i] + 2, "A1.0" + i, "", GiaoVien.builder().id(i).build(), LopHocPhan.builder().id(i).build());
+            for (int i = 1; i <= 6; i++) {
+                lopTinChi = new LopTinChi(30, 0, true, tiet[i % 4], tiet[i % 4] + 2, "A1.0" + i, "", GiaoVien.builder().id((i - 1) % 3 + 1).build(), LopHocPhan.builder().id(i).build());
                 lopTinChiRepository.save(lopTinChi);
             }
 
@@ -146,12 +146,14 @@ class ServiceInstanceRestController {
             SinhVien_LHP sinhVienLhp = new SinhVien_LHP();
             for (int j = 1; j <= 3; j++) {
                 for (int i = 1; i <= 30; i++) {
-                    sinhVienLhp = new SinhVien_LHP(SinhVien.builder().id(i).build(), LopHocPhan.builder().id(j).build(), TrangThaiSvLHP.DANGHOC, true, 0, true, LocalDate.of(2023, 10, 10), LocalDate.of(2023, 9, 1));
+                    sinhVienLhp = new SinhVien_LHP(SinhVien.builder().id(20115700L + i).build(), LopHocPhan.builder().id(j).build(), TrangThaiSvLHP.DANGHOC, true, 0, true, LocalDate.of(2023, 10, 10), LocalDate.of(2023, 9, 1));
                     sinhVien_LHPRepository.save(sinhVienLhp);
                 }
             }
 
-        };
+        }
+
+                ;
     }
 
     @RequestMapping("/service-instances/{applicationName}")
