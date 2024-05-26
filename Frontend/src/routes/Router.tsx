@@ -16,7 +16,8 @@ import {
   GeneralInformation,
   LookUpDebt,
   LearningOutcomes,
-  OnlinePayments
+  OnlinePayments,
+  ScheduleAccording,
 } from "pages";
 import path from "./Path";
 import { useUser } from "contexts/UserProvider";
@@ -41,6 +42,7 @@ const Router = () => {
         { path: `${path.LookUpDebt}`, element: <LookUpDebt /> },
         { path: `${path.LearningOutcomes}`, element: <LearningOutcomes /> },
         { path: `${path.OnlinePayments}`, element: <OnlinePayments /> },
+        { path: `${path.ScheduleAccording}`, element: <ScheduleAccording /> },
       ],
     },
     { path: `${path.SIGNIN}`, element: <SignIn /> },

@@ -11,13 +11,13 @@ const Root = () => {
 
   const { Content } = Layout;
 
-  if (isToken) {
+  if (!isToken) {
     return <Navigate to={`${path.SIGNIN}`} />;
   }
  
   return (
     <Layout className="min-h-screen">
-      <Sidebar />
+      <Sidebar/>
       <Layout>
         <MainHeader />
         <div className="pb-5 px-5 bg-sub h-full">

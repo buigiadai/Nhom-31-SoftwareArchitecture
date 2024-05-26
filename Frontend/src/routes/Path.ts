@@ -10,6 +10,7 @@ const path = {
     LookUpDebt: "/LookUpDebt",
     LearningOutcomes: "/LearningOutcomes",
     OnlinePayments: "/OnlinePayments",
+    ScheduleAccording: "/ScheduleAccording",
   };
   
   export default path;

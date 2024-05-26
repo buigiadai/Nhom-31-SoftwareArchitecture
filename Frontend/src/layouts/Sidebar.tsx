@@ -31,6 +31,9 @@ const {
   DropboxOutlined,
   UsergroupAddOutlined,
   SettingOutlined,
+  MoneyCollectOutlined,
+  RiseOutlined,
+  FundViewOutlined,
 } = icons;
 
 const Sidebar = () => {
@@ -42,38 +45,35 @@ const Sidebar = () => {
 
   const items: MenuItem[] = [
     getItem("Trang chủ", `${path.ROOT}`, <PieChartOutlined />),
-
     getItem("Thông tin chung", "category", <ProductOutlined />, [
       getItem("Thông tin sinh viên", `${path.GeneralInformation}`),
-      getItem("Ghi chú nhắn nhở", `${path.ROOT}`),
-      getItem("Đề xuất cập nhật thông tin", `${path.ROOT}`),
+      // getItem("Thông tin cá nhân", `${path.PersonalInformation}`),
     ]),
-    getItem("Học tập", "manage-order", <ShoppingCartOutlined />, [
+    getItem("Học tập", "manage-order", <FundViewOutlined />, [
       getItem("Kết quả học tập", `${path.LearningOutcomes}`),
       getItem("Lịch theo tuần", `${path.Schedule}`),
-      getItem("Lịch theo tiến độ", `${path.ROOT}`),
-      getItem("Lịch theo lớp học danh nghĩa", `${path.ROOT}`),
+      getItem("Lịch theo tiến độ", `${path.ScheduleAccording}`),
+      // getItem("Lịch theo lớp học danh nghĩa", `${path.ROOT}`),
     ]),
-    getItem("Đăng ký học phần", "report", <WarningOutlined />, [
+    getItem("Đăng ký học phần", "report", <RiseOutlined />, [
       getItem("Đăng ký học phần", `${path.RegisterCourse}`),
       getItem("Chương trình khung", `${path.FrameProgram}`),
     ]),
-    getItem("Học phí", "report", <WarningOutlined />, [
-      getItem("Tra cứu công nợ", `${path.LookUpDebt}`),
+    getItem("Học phí", "report", <MoneyCollectOutlined />, [
       getItem("Thanh toán trực tuyến", `${path.OnlinePayments}`),
       getItem("Phiếu thu tổng hợp", `${path.GeneralReceipt}`),
     ]),
-
   ];
 
   return (
     <Sider
       width={262}
       collapsible
+      style={{ backgroundColor: "#E7ECF0" }}
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
     >
-      <div className="flex items-center justify-center py-5 bg-slate-600">
+      <div className="flex items-center justify-center py-5 bg-white border-b-error-50">
         <img
           src={logo_iuh}
           width={200}
@@ -84,7 +84,7 @@ const Sidebar = () => {
         />
       </div>
       <Menu
-        theme="dark"
+        theme="light"
         defaultOpenKeys={location.state?.key ? [location.state.key] : []}
         selectedKeys={[location.pathname]}
         mode="inline"

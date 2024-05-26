@@ -8,11 +8,12 @@ import AuthApi from "apis/AuthApi";
 import { background, logo_iuh } from "assets/images";
 import { useUser } from "contexts/UserProvider";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import path from "routes/Path";
 import { parseParams } from "utils/getQueryString";
 import { getSignoutUri } from "utils/getSignoutUri";
 import { IdcardOutlined, LockOutlined } from "@ant-design/icons";
+import Router from "routes/Router";
 
 const onboards = [
   {
@@ -65,7 +66,11 @@ const SignInPage = (): JSX.Element => {
   });
 
   const onSubmit = async () => {
-    window.location.replace("/");
+    console.log("abc");
+    localStorage.setItem("token", "20122281");
+    // navigate to Home
+    navigate(`${path.ROOT}`);
+    // window.location.replace("/");
     // window.location.replace(process.env.REACT_APP_AWS_COGNITO_LOGIN as string);
   };
   const screenWidth = window.innerWidth;

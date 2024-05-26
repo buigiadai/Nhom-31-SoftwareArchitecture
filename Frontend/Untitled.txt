@@ -1,0 +1,4 @@
+
+git commit -m "Best lười"
+
+git push -u origin master

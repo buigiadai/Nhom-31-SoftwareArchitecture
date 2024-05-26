@@ -17,25 +17,27 @@ import {
   download6,
   download7,
   download8,
-} from "assets/icon"; 
-
-// import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
-// import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css.map";
-// import "./../../external_libs/bootstrap-3.3.7/dist/css/bootstrap.min.css";
+} from "assets/icon";
+import path from "routes/Path";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const featured = [
   {
-    link: "#",
+    link: path.Schedule,
     imgsrc: download,
     alt: "Lịch theo tuần",
   },
-  { link: "#", imgsrc: download1, alt: "Kết quả học tập" },
-  { link: "#", imgsrc: download2, alt: "Đăng ký học phần" },
-  { link: "#", imgsrc: download3, alt: "Tra cứu công nợ" },
-  { link: "#", imgsrc: download4, alt: "Thanh toán trực tuyến" },
-  { link: "#", imgsrc: download6, alt: "Phiếu thu tổng hợp" },
-  { link: "#", imgsrc: download7, alt: "Lịch theo tiến độ" },
-  { link: "#", imgsrc: download8, alt: "Nhắc nhở" },
+  { link: path.LearningOutcomes, imgsrc: download1, alt: "Kết quả học tập" },
+  { link: path.RegisterCourse, imgsrc: download2, alt: "Đăng ký học phần" },
+  { link: "#", imgsrc: download3, alt: "# Tra cứu công nợ" },
+  {
+    link: path.OnlinePayments,
+    imgsrc: download4,
+    alt: "Thanh toán trực tuyến",
+  },
+  { link: path.GeneralReceipt, imgsrc: download6, alt: "Phiếu thu tổng hợp" },
+  { link: path.ScheduleAccording, imgsrc: download7, alt: "Lịch theo tiến độ" },
+  { link: "#", imgsrc: download8, alt: "# Nhắc nhở" },
 ];
 const hocKyDaHoc = [
   "HK1 (2020-2021)",
@@ -74,7 +76,7 @@ const cardStyleRight: React.CSSProperties = {
   flexDirection: "column",
   flex: 1,
 };
-
+// const navigate = useNavigate();
 const Home: React.FC = () => (
   <div>
     {/* Header */}
@@ -292,16 +294,30 @@ const Home: React.FC = () => (
       {featured.map((itemFeatured, index) => (
         <div className="featured-item">
           <a
-            href={itemFeatured.link}
+            // href={itemFeatured}
             title={itemFeatured.alt}
             id="menusinhvien-8-title"
+            // onClick={() => {navigate(itemFeatured.link)}}
           >
             <div className="box-df auto-height">
-              <div className="icon">
-                <img src={itemFeatured.imgsrc} alt={itemFeatured.alt} />
-              </div>
-              <span lang="menusinhvien-8-vt">{itemFeatured.alt}</span>
+              {/* <div className="icon"> */}
+              <img
+                src={itemFeatured.imgsrc}
+                alt={itemFeatured.alt}
+                style={{ height: "35px" }}
+              />
+              {/* </div> */}
             </div>
+
+            <span
+              style={{
+                marginBottom: "10px",
+                paddingBottom: "20px",
+                fontSize: "16px",
+              }}
+            >
+              {itemFeatured.alt}
+            </span>
           </a>
         </div>
       ))}
@@ -315,7 +331,7 @@ const Home: React.FC = () => (
             <div className="portlet-title">
               <div className="caption">
                 <span className="caption-subject bold">
-                  <a href="/ket-qua-hoc-tap.html" lang="db-kqht">
+                  <a href={path.LearningOutcomes} lang="db-kqht">
                     Kết quả học tập
                   </a>
                 </span>

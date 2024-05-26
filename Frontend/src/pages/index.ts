@@ -10,5 +10,6 @@ export { default as GeneralInformation } from "./GeneralInformation/GeneralInfor
 export { default as LookUpDebt } from "./LookUpDebt/LookUpDebt";
 export { default as LearningOutcomes } from "./LearningOutcomes/LearningOutcomes";
 export { default as OnlinePayments } from "./OnlinePayments/OnlinePayments";
+export { default as ScheduleAccording } from "./ScheduleAccordingToProgress/ScheduleAccording";
 
 export { default as ProtectedRoute } from "./Root";

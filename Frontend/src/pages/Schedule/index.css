@@ -1,11 +1,3 @@
-body {
-  font-size: 100%;
-  font-family: sans-serif;
-  line-height: 1.42857143;
-  color: #667580;
-  direction: "ltr";
-  background: #e7ecf0;
-}
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -60,7 +52,6 @@ body {
 
 body {
   background: #e7ecf0;
-  color: #667580;
   font-size: 12px;
   font-family: Tahoma !important;
 }
@@ -453,40 +444,6 @@ a {
   background-color: #1da1f2;
   color: #fff;
   border-radius: 3px !important;
-}
-
-a:active,
-a:hover {
-  outline: 0;
-}
-
-a:hover {
-  color: #23527c;
-  text-decoration: underline;
-}
-
-a:hover {
-  cursor: pointer;
-  color: #23527c;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #1da1f2;
-}
-
-.btn:hover {
-  color: #333;
-  text-decoration: none;
-}
-
-.btn:hover {
-  transition: all 0.3s;
-}
-
-.portlet > .portlet-title > .actions .btn-action:hover {
-  background-color: #e7ecf0;
-  color: #1da1f2;
 }
 
 table {
@@ -925,25 +882,6 @@ i,
   display: block;
 }
 
-.mt-radio:hover > input:not([disabled]) ~ span {
-  background: #d9d9d9;
-  webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-.mt-radio:hover > input:not([disabled]):checked ~ span,
-.mt-radio > input:checked ~ span {
-  webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -ms-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-  background: #d9d9d9;
-}
-
 .input-icon > i,
 .mt-checkbox-list .mt-checkbox,
 .mt-checkbox-list .mt-radio,
@@ -1142,11 +1080,6 @@ tr {
   opacity: 0.9;
 }
 
-.k-icon {
-  background-image: url("https://sv.iuh.edu.vn/Content/kendo/2016.3.1118/PMTSchool/sprite.png");
-  border-color: transparent;
-}
-
 :root * > .k-icon {
   vertical-align: middle;
 }
@@ -1157,10 +1090,6 @@ tr {
 
 .k-i-calendar:before {
   content: "\e62e";
-}
-
-.k-icon:hover {
-  opacity: 1;
 }
 
 th {
@@ -1235,6 +1164,7 @@ th {
 
 .table > thead:first-child > tr:first-child > th {
   border-top: 0;
+  font-weight: bold;
 }
 
 td {
@@ -1398,4 +1328,26 @@ p {
 }
 #viewDsCamThi.style-Aq7JP {
   margin-top: 7px;
+}
+
+p,
+span {
+  color: black;
+}
+
+.fl-table .content.color-hocTH {
+  background-color: #71cb35;
+  border-color: red;
+}
+.fl-table .content.color-hocTT {
+  background-color: #92D6FF;
+  border-color: red;
+}
+.fl-table .content.color-lichthi {
+  background-color: #FDFF9A;
+  border-color: red;
+}
+.fl-table .content.color-tamngung {
+  background-color: #D94738;
+  border-color: greenyellow;
 }

@@ -114,6 +114,7 @@ html {
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
+  zoom: 120%;
 }
 
 .portlet {
@@ -1192,6 +1193,9 @@ p {
 .color-white {
   color: white;
 }
+.color-black {
+  color: black;
+}
 .selected {
   background-color: #fff9c0; /* Màu nền mới khi được chọn */
 }
@@ -1293,7 +1297,7 @@ tr:hover {
 .ctlhp-bold {
   font-weight: 700;
 }
-/* Nút đẹp */ 
+/* Nút đẹp */
 .button {
   --width: 200px;
   --height: 75px;
@@ -1310,7 +1314,6 @@ tr:hover {
   border-radius: 0.45em;
   font-family: "Arial";
   transition: background 0.3s;
-  
 }
 
 .button::before {
@@ -1321,7 +1324,7 @@ tr:hover {
   background-color: #555;
   font-size: 0.9rem;
   color: #fff;
-  border-radius: .25em;
+  border-radius: 0.25em;
   line-height: var(--tooltip-height);
   bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
   left: calc(50% - var(--tooltip-width) / 2);
@@ -1329,7 +1332,7 @@ tr:hover {
 
 .button::after {
   position: absolute;
-  content: '';
+  content: "";
   width: 0;
   height: 0;
   border: 10px solid transparent;
@@ -1338,7 +1341,8 @@ tr:hover {
   bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
 }
 
-.button::after,.button::before {
+.button::after,
+.button::before {
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s;
@@ -1350,23 +1354,26 @@ tr:hover {
   justify-content: center;
 }
 
-.button-wrapper,.text,.icon {
+.button-wrapper,
+.text,
+.icon {
   overflow: hidden;
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   color: #fff;
-  font-size:  22px;
+  font-size: 22px;
   font-weight: 700;
   align-items: center;
 }
 
 .text {
-  top: 0
+  top: 0;
 }
 
-.text,.icon {
+.text,
+.icon {
   transition: top 0.5s;
 }
 
@@ -1395,7 +1402,8 @@ tr:hover {
   top: 0;
 }
 
-.button:hover:before,.button:hover:after {
+.button:hover:before,
+.button:hover:after {
   opacity: 1;
   visibility: visible;
 }
@@ -1407,6 +1415,3 @@ tr:hover {
 .button:hover:before {
   bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
 }
-
-
-

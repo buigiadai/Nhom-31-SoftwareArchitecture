@@ -1,28 +1,82 @@
 // Đăng ký học phần
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 import "./index.css";
 import { PrinterOutlined, SettingOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import { keyToWin } from "assets/images";
 import { useMutation } from "@tanstack/react-query";
+import ReactToPrint from "react-to-print";
+
 // import StudentApi from "apis/Student";
 import axios from "axios";
 
 function RegisterCourse() {
+  const mssv = 1;
+  const namHoc = 2023;
+  const nameHost = "172.20.10.4";
+
+  const linkGetHPCDK = `http://${nameHost}:8080/api/v1/dkhp/lopHPChoDK?`;
+
+  const linkGetMonHocCDK = `http://${nameHost}:8080/api/v1/dkhp/hocPhanChoDangKy?mssv=`;
+
+  const linkChiTietLop = `http://${nameHost}:8080/api/v1/dkhp/chiTietLHP?maLHP=`;
+
+  //interface
+  interface LopHPDaDK {
+    id: string;
+    maLHP: string;
+    tenMonHoc: string;
+    tenLopDuKien: string;
+    soTC: number;
+    nhom: number;
+    hocPhi: number;
+    hanNop: string;
+    thu: number;
+    trangThaiDK: string;
+    ngayDangKy: string;
+    trangThaiLHP: string;
+  }
+
+  interface LopHPChoDK {
+    id: string;
+    name: string;
+    maLopHP: string;
+    lop: string;
+    trangthai: string;
+    soLuong: string;
+  }
+
+  interface ChiTietLopHocPhan {
+    id: string;
+    lichHoc: string;
+    nhomTH: string;
+    viTri: string;
+    phong: string;
+    coSo: string;
+    giangVien: string;
+    ngayHoc: string;
+    soLuong: number;
+    soLuongToiDa: number;
+  }
+
+  interface MonHocChoDangKy {
+    id: string;
+    maHocPhan: string;
+    tenMon: string;
+    soTC: number;
+    isBatBuoc: number;
+    listTienQuyet: {
+      id: string;
+      nameHP: string;
+      maHP: string;
+      loaiHP: string;
+    }[];
+  }
+
   //Data
-  const [dsMonChoDK, setDsMonChoDK] = useState([
-    {
-      id: "1",
-      maHocPhan: "4203003193",
-      tenMon: "Toán ứng dụng",
-      soTC: 3,
-      isBatBuoc: 0,
-      listTienQuyet: [
-        { id: "1", nameHP: "Hệ thống máy tính", maHP: "002137", loaiHP: "a" },
-      ],
-    },
-  ]);
+  const [dsMonChoDK, setDsMonChoDK] = useState<MonHocChoDangKy[]>([]);
 
   const [hocKy, setHocKy] = useState([
     {
@@ -52,64 +106,11 @@ function RegisterCourse() {
     },
   ]);
 
-  const [dsLopHPChoDK, setDsLopHPChoDK] = useState([
-    {
-      id: "1",
-      name: "Lập trình hướng sự kiện với công nghệ .NET",
-      maLopHP: "420300204401",
-      lop: "DHKTPM18B",
-      trangthai: "Đã khoá",
-      soLuong: "0 / 80",
-    },
-    {
-      id: "2",
-      name: "Lập trình hướng sự kiện với công nghệ .NET",
-      maLopHP: "420300204403",
-      lop: "DHKTPM18B",
-      trangthai: "Đã khoá",
-      soLuong: "0 / 80",
-    },
-    {
-      id: "3",
-      name: "Lập trình hướng sự kiện với công nghệ .NET",
-      maLopHP: "420300204407",
-      lop: "DHKTPM18B",
-      trangthai: "Đang lên kế hoạch",
-      soLuong: "0 / 80",
-    },
-  ]);
+  const [dsLopHPChoDK, setDsLopHPChoDK] = useState<LopHPChoDK[]>([]);
 
-  const [dsLopHPDaDK, setDsLopHPDaDK] = useState([
-    {
-      id: "1",
-      maLHP: "420300154901",
-      tenMonHoc: "Kiến trúc và Thiết kế phần mềm",
-      tenLopDuKien: "DHKTPM16A",
-      soTC: 4,
-      nhom: 1,
-      hocPhi: 3010000,
-      hanNop: "15/12/2023",
-      thu: 1,
-      trangThaiDK: "Đăng ký mới",
-      ngayDangKy: "27/10/2023",
-      trangThaiLHP: "Đã khóa",
-    },
-  ]);
+  const [dsLopHPDaDK, setDsLopHPDaDK] = useState<LopHPDaDK[]>([]);
 
-  const [chiTietLHP, setchiTietLHP] = useState([
-    {
-      id: "1",
-      lichHoc: "LT - Thứ 6 (Tiết 1 -> 3 )",
-      nhomTH: "",
-      viTri: "V8.03",
-      phong: "V (CS1)",
-      coSo: "Cơ sở 1 (Thành phố Hồ Chí Minh)",
-      giangVien: "ThS Hà Thị Ánh",
-      ngayHoc: "12/01/2024 - 17/05/2024",
-      soLuong: 80,
-      soLuongToiDa: 80,
-    },
-  ]);
+  const [chiTietLHP, setchiTietLHP] = useState<ChiTietLopHocPhan[]>([]);
 
   const [dsLichHoc, setDsLichHoc] = useState([
     {
@@ -123,8 +124,8 @@ function RegisterCourse() {
       ngayHoc: "10/01/2024 - 17/04/2024",
     },
   ]);
-  // selected
 
+  // selected
   const [monhocSelected, setMonhocelected] = useState("");
   const [malopSelected, setMalopSelected] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -138,50 +139,25 @@ function RegisterCourse() {
     setIsDialogOpen(false);
   }
 
-  // const {data:studentInfo,mutate: getThongTin} = useMutation({
-  //   mutationFn: ()=>StudentApi.getThongTin({mssv:1}),
-  //   onSuccess:(data)=>{
-  //     console.log(data);
-  //   },
-  //   onError:(error)=>{
-  //     console.log(error);
-  //   }
-  // })
-
-  // async function getThongTin(params: any) {
-  //   try {
-  //     const response = await axios.get(
-  //       "http://localhost:8080/api/v1/sinhvien/thongTin?mssv=1"
-  //     );
-  //     console.log("objectttt", response);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getThongTin({ mssv: 1 });
-  // }, []);
-
   // function
   useEffect(() => {
-    const number = 3010000;
-    const formatted = numberWithCommas(number);
     getMonHocCDK(1);
     getLopHocDaDK(1);
   }, []);
 
   function setlectLoaiHP(loaiHP: number) {
     setLoaiHP(loaiHP);
-    alert(loaiHP);
+    // alert(loaiHP);
   }
 
   function selectMonHocChoDangKy(maHP: string) {
     setMonhocelected(maHP); //Chọn môn học
+    getLopHocCDK(2023, 1, maHP);
   }
-  function selectLopHocCDK(maHP: string) {
-    setMalopSelected(maHP); //Chọn lớp học
-    setchiTietLHP([]);
+
+  function selectLopHocCDK(maLopHP: string) {
+    setMalopSelected(maLopHP); //Chọn lớp học
+    getCTLHP(maLopHP);
   }
 
   function selectLichHoc() {
@@ -189,9 +165,17 @@ function RegisterCourse() {
     openDialog();
   }
 
+  function selectNhomTH(nhomTH: any) {
+
+    // alert(nhomTH);
+  }
+
   //tinh tong
   const tinhTongTC = (dsLopHPDaDK: any) => {
-    return dsLopHPDaDK.reduce((tong: any, monHoc: any) => tong + monHoc.tc, 0);
+    return dsLopHPDaDK.reduce(
+      (tong: any, monHoc: any) => tong + monHoc.soTC,
+      0
+    );
   };
 
   const tinhTongHP = (dsLopHPDaDK: any) => {
@@ -207,11 +191,35 @@ function RegisterCourse() {
   // getData API
   async function getMonHocCDK(event: any) {
     try {
-      const res = await axios.get(
-        `http://localhost:8080/api/v1/dkhp/hocPhanChoDangKy?mssv=1`
-      );
+      const res = await axios.get(linkGetMonHocCDK + mssv);
       console.log("res", res.data);
       setDsMonChoDK(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getLopHocCDK(nam: any, ky: any, maMon: any) {
+    try {
+      const res = await axios.get(linkGetHPCDK + "namHoc=" + nam + "&ky=" + ky + "&maMon=" + maMon
+      // , {
+      //   params : { 
+      //     token: localStorage.getItem("token")
+      //   }
+      // }
+    );
+      console.log("res", res.data);
+      setDsLopHPChoDK(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getCTLHP(maLopHP: any) {
+    try {
+      const res = await axios.get(linkChiTietLop + maLopHP);
+      console.log("res", res.data);
+      setchiTietLHP(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -228,6 +236,9 @@ function RegisterCourse() {
       console.log(err);
     }
   }
+
+  //In dữ liệu
+  const dataPrint = useRef<HTMLTableElement>(null);
 
   //html
   return (
@@ -266,7 +277,7 @@ function RegisterCourse() {
             data-name="warningChonLichCoNhom"
             lang="dangkyhocphan-warningChonLichCoNhom"
           >
-            học phần có chia nhóm thực hành, vui lòng chọn lịch có nhóm.
+            Học phần có chia nhóm thực hành, vui lòng chọn lịch có nhóm.
           </div>
           <div
             hidden={true}
@@ -381,7 +392,7 @@ function RegisterCourse() {
                         <th lang="dkhp-tc">TC</th>
                         <th lang="dkhp-batbuoc">Bắt buộc</th>
                         <th lang="dkhp-hoctruoctienquyetsonghanh">
-                          học phần: học trước (a),
+                          Học phần: học trước (a),
                           <br />
                           tiên quyết (b),
                           <br />
@@ -483,30 +494,7 @@ function RegisterCourse() {
                     <h3 className="title-table" lang="lhpchodangky-tabletitle">
                       Lớp học phần chờ đăng ký
                     </h3>
-                    <div className="text-right style-8KMSB" id="style-8KMSB">
-                      <label>
-                        <input
-                          id="checkLichTrung"
-                          name="checkLichTrung"
-                          type="checkbox"
-                          defaultValue="true"
-                        />
-                        <input
-                          name="checkLichTrung"
-                          type="hidden"
-                          defaultValue="false"
-                        />
-                        <b>
-                          <span
-                            className="text-uppercase style-Jg35F"
-                            lang="lhpchodangky-lhpkhongtrunglich"
-                            id="style-Jg35F"
-                          >
-                            HIỂN THỊ LỚP học phần KHÔNG TRÙNG LỊCH
-                          </span>
-                        </b>
-                      </label>
-                    </div>
+
                     <div className="table-responsive">
                       <table
                         id="table_lhpchodangky"
@@ -524,34 +512,40 @@ function RegisterCourse() {
                           </tr>
                         </thead>
                         <tbody>
-                          {dsLopHPChoDK?.map((item, index) => (
-                            <tr
-                              key={index}
-                              onClick={() => selectLopHocCDK(item.maLopHP)}
-                              className={
-                                malopSelected === item.maLopHP ? "selected" : ""
-                              }
-                            >
-                              <td style={{ width: 40 }}>{index + 1}</td>
-                              <td className="text-left font-medium  ">
-                                <div className="name font-bold text-lime-500">
-                                  {item.name}
-                                </div>
-                                <div>
-                                  <span lang="dkhp-trangthai">Trạng thái</span>:{" "}
-                                  <span className="cl-red">
-                                    {item.trangthai}
-                                  </span>
-                                  <br />
-                                  <span lang="dkhp-malhp">
-                                    Mã lớp học phần:{" "}
-                                  </span>
-                                  {item.maLopHP} - {item.lop}
-                                </div>
-                              </td>
-                              <td> {item.soLuong}</td>
-                            </tr>
-                          ))}
+                          {dsLopHPChoDK &&
+                            dsLopHPChoDK.map((item, index) => (
+                              <tr
+                                key={index}
+                                onClick={() => selectLopHocCDK(item.maLopHP)}
+                                className={
+                                  malopSelected === item.maLopHP
+                                    ? "selected"
+                                    : ""
+                                }
+                              >
+                                <td style={{ width: 40 }}>{index + 1}</td>
+                                <td className="text-left font-medium  ">
+                                  <div className="name font-bold text-lime-500">
+                                    {item.name}
+                                  </div>
+                                  <div>
+                                    <span lang="dkhp-trangthai">
+                                      Trạng thái
+                                    </span>
+                                    :{" "}
+                                    <span className="cl-red">
+                                      {item.trangthai}
+                                    </span>
+                                    <br />
+                                    <span lang="dkhp-malhp">
+                                      Mã lớp học phần:{" "}
+                                    </span>
+                                    {item.maLopHP} - {item.lop}
+                                  </div>
+                                </td>
+                                <td> {item.soLuong}</td>
+                              </tr>
+                            ))}
                         </tbody>
                       </table>
                     </div>
@@ -575,15 +569,7 @@ function RegisterCourse() {
                     >
                       Chi tiết lớp học phần
                     </h3>
-                    <div className="text-right" style={{ marginBottom: 5 }}>
-                      <button
-                        // onclick="XemLichTrung(this)"
-                        className="btn btn--m block first style-4kJ3X"
-                        id="dkhp-xemlichtrungButton"
-                      >
-                        Xem lịch trùng
-                      </button>
-                    </div>
+
                     <table
                       id="tbChiTietDKHP"
                       className="table-pointer table-dkhp table-custom table table-bordered text-center no-footer dtr-inline"
@@ -596,7 +582,7 @@ function RegisterCourse() {
                             <p className="color-white">
                               <span
                                 itemID="dkhp-trangthai"
-                                className="color-white"
+                                className="color-black"
                               >
                                 Thông tin lớp học phần
                               </span>
@@ -604,20 +590,13 @@ function RegisterCourse() {
                           </th>
                           <th>
                             <div>
-                              <span className="color-white">Nhóm</span>
+                              <span className="color-black">Nhóm</span>
                             </div>
                           </th>
 
                           <th>
                             <div>
-                              <span className="color-white">
-                                <span
-                                  itemID="dkhp-sisomax"
-                                  className="color-white"
-                                >
-                                  Sĩ số
-                                </span>
-                              </span>
+                              <span className="color-black">Sĩ số</span>
                             </div>
                           </th>
                         </tr>
@@ -625,7 +604,7 @@ function RegisterCourse() {
                       <tbody>
                         {chiTietLHP.length !== 0 ? (
                           chiTietLHP.map((item, index) => (
-                            <tr>
+                            <tr onClick={() => selectNhomTH(item.nhomTH)}>
                               <td>
                                 <div className="ctlhp">
                                   <span itemID="dkhp-lichhoc">Lịch học: </span>
@@ -660,7 +639,6 @@ function RegisterCourse() {
                               <td>
                                 <div>
                                   <span itemID="dkhp-sisomax">
-                                    {" "}
                                     {item.soLuong} / {item.soLuongToiDa}
                                   </span>
                                 </div>
@@ -678,11 +656,10 @@ function RegisterCourse() {
                     </table>
                     {chiTietLHP.length !== 0 ? (
                       <div className="flex items-center justify-center w-full">
-                        <div data-tooltip="-999 $" className="button border-1">
+                        <div data-tooltip="" className="button border-1">
                           <div className="button-wrapper">
                             <div className="text">Đăng ký</div>
                             <span className="icon">
-                              {/* https://i.pinimg.com/originals/a2/3c/6f/a23c6fafa41d474975f9539d4a742e67.png */}
                               <img src={keyToWin} alt="" />
                             </span>
                           </div>
@@ -707,16 +684,25 @@ function RegisterCourse() {
               className="title-table"
               lang="dangkyhocphan-lhpdadangkytabletitle"
             >
-              {" "}
               Lớp HP đã đăng ký trong học kỳ này{" "}
               <a
                 href="javascript:;"
                 className="btn btn-action"
                 id="btn_InDDK"
-                // onclick="PrintElem($('#id-hoc-phan-da-dk'))"
+                // onClick={() => printData()}
+                // onClick={() => {
+                // printData();
+                // }}
                 style={{ right: 0 }}
               >
-                <PrinterOutlined />
+                <ReactToPrint
+                  trigger={() => (
+                    <a type="primary">
+                      <PrinterOutlined />
+                    </a>
+                  )}
+                  content={() => dataPrint.current}
+                />
               </a>
             </h3>
             <div className="table-responsive">
@@ -725,6 +711,7 @@ function RegisterCourse() {
                 width="100%"
                 role="grid"
                 id="dkHocPhan"
+                ref={dataPrint}
               >
                 <thead>
                   <tr role="row">

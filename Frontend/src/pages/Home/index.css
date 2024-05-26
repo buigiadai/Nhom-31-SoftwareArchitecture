@@ -1,11 +1,12 @@
 p,
-span {
-  font-size: 16px;
+span,
+b {
+  font-size: 18px;
   color: #667580;
 }
 
 a {
-  font-size: 14px;
+  font-size: 18px;
   color: rgb(77, 161, 232);
 }
 
@@ -25,6 +26,7 @@ layout {
 .bold {
   font-weight: 700 !important;
   font-size: 20px;
+  color: #667580;
 }
 #bigfont {
   font-size: 36px;
@@ -84,6 +86,8 @@ layout {
   padding-left: 7.5px;
   padding-right: 7.5px;
   background-color: white;
+  overflow: hidden;
+  padding-bottom: 20px;
 }
 
 .featured-item .icon {
@@ -91,11 +95,15 @@ layout {
   height: 50px;
   margin-bottom: 10px;
   align-items: center;
-  display: flex;
+  display: table;
   justify-content: center;
 }
+
 .featured .featured-item .box-df {
-  min-height: 120px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chart-custom .box-df {
@@ -144,6 +152,8 @@ layout {
   width: 50%;
   display: inline-block;
   float: left;
+  color: #667580;
+  font-size: 16px;
 }
 
 .panel-admin .panel-scroll {
@@ -162,7 +172,9 @@ layout {
   padding-right: 7.5px;
   padding-left: 7.5px;
 }
-
+.col-md-3 span {
+  font-size: 18px;
+}
 .portlet > .portlet-title:after,
 .portlet > .portlet-title:before {
   content: " ";
@@ -205,20 +217,29 @@ layout {
   padding-left: 7.5px;
   width: 45%;
   display: "flex";
+  color: #667580;
+}
+.col-md-5 span {
+  font-size: 16px;
+  color: #667580;
 }
 .col-md-3 {
   padding-right: 7.5px;
   padding-left: 7.5px;
   width: 25%;
   display: "flex";
-  margin-left: 25px;
+  color: #667580;
 }
 .col-md-4 {
   padding-right: 7.5px;
   padding-left: 7.5px;
   width: 35%;
   display: "flex";
-  margin-left: 25px;
+  color: #667580;
+}
+.col-md-4 span {
+  font-size: 16px;
+  color: #667580;
 }
 .chart-custom {
   display: "flex";
@@ -254,7 +275,11 @@ s table tbody tr {
   border-top: 1px solid black;
 }
 
-body{
+body {
   /* kich thước bằng 80% */
-  zoom:88%;
+  zoom: 88%;
+}
+.col-md-12 span {
+  font-size: 18px;
+  color: #667580;
 }

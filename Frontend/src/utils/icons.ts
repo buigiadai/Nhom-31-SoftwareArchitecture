@@ -20,6 +20,9 @@ import {
   EditOutlined,
   EyeOutlined,
   PlusOutlined,
+  MoneyCollectOutlined,
+  RiseOutlined,
+  FundViewOutlined,
 } from "@ant-design/icons";
 
 export const icons = {
@@ -44,4 +47,7 @@ export const icons = {
   EditOutlined,
   EyeOutlined,
   PlusOutlined,
+  MoneyCollectOutlined,
+  RiseOutlined,
+  FundViewOutlined,
 };
